@@ -1,0 +1,85 @@
+{
+  "name": "ngrx-etc",
+  "version": "0.0.0-development",
+  "description": "Utilities for NgRx",
+  "keywords": [
+    "NgRx",
+    "Redux",
+    "Angular",
+    "Immer"
+  ],
+  "author": "Tim Deschryver",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timdeschryver/ngrx-etc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/timdeschryver/ngrx-etc/issues"
+  },
+  "homepage": "https://github.com/timdeschryver/ngrx-etc#readme",
+  "private": false,
+  "source": "src/index.ts",
+  "main": "dist/ngrx-etc.js",
+  "umd:main": "dist/ngrx-etc.umd.js",
+  "module": "dist/ngrx-etc.mjs",
+  "unpkg": "dist/ngrx-etc.umd.js",
+  "types": "dist/ngrx-etc.d.ts",
+  "scripts": {
+    "dev": "microbundle watch",
+    "prebuild": "npm run test",
+    "build": "microbundle",
+    "postbuild": "cp ./README.md ./dist & cp ./package.json ./dist",
+    "pretest": "eslint . ",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "semantic-release": "semantic-release"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "release": {
+    "pkgRoot": "dist"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=8.0.0-rc.1",
+    "@ngrx/store": ">=8.0.0-beta.1"
+  },
+  "dependencies": {
+    "immer": "^3.1.1"
+  },
+  "devDependencies": {
+    "@angular/core": "^8.0.0-rc.1",
+    "@ngrx/store": "^8.0.0-beta.1",
+    "@types/jest": "^24.0.11",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "husky": "^2.1.0",
+    "jest": "^24.7.1",
+    "lint-staged": "^8.1.5",
+    "microbundle": "^0.11.0",
+    "prettier": "^1.17.0",
+    "semantic-release": "^15.13.3",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.2"
+  }
+}
