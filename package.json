@@ -26,7 +26,7 @@
   "unpkg": "ngrx-etc.umd.js",
   "types": "ngrx-etc.d.ts",
   "scripts": {
-    "build": "microbundle --output ./dist",
+    "build": "microbundle --output ./dist --external all",
     "postbuild": "cp ./README.md ./dist & cp ./package.json ./dist",
     "pretest": "eslint . ",
     "test": "jest",
