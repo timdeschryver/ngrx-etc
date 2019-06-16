@@ -2,7 +2,7 @@ import {
   createReducer,
   createAction,
   on,
-  ɵngrx_modules_store_store_ba as createImmutabilityCheckMetaReducer,
+  ɵngrx_modules_store_store_z as createImmutabilityCheckMetaReducer,
   props,
   ActionReducer,
   Action,
@@ -141,9 +141,10 @@ function setupReducer(
   ),
 ) {
   const immutabilityCheckMetaReducer = createImmutabilityCheckMetaReducer({
-    strictImmutability: true,
-    strictActionSerializability: false,
-    strictStateSerializability: false,
+    strictActionImmutability: true,
+    strictActionSerializability: true,
+    strictStateImmutability: true,
+    strictStateSerializability: true,
   })
 
   const reducerWithImmutableCheck = immutabilityCheckMetaReducer(reducer)
