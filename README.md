@@ -74,3 +74,22 @@ one = createEffect(() => this.actions.pipe(
 ### `withSameCorrelationAs`
 
 An implementation of the RxJS `filter` operator to check if the input `Action`'s `__correlationId` is equal to the next `Action`'s `__correlationId`.
+
+## Rules
+
+To make use of the rules, extend from `ngrx-etc/rules` in your `tslint.json` file:
+
+```json
+{
+  "extends": ["ngrx-etc/rules"],
+  "rules": {
+    ...
+  }
+}
+```
+
+### Rules
+
+| Rule                  | Description                             |
+| --------------------- | --------------------------------------- |
+| `ngrx-action-hygiene` | Enforces the use of good action hygiene |

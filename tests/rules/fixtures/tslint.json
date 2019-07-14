@@ -1,0 +1,7 @@
+{
+  "defaultSeverity": "error",
+  "rules": {
+    "ngrx-action-hygiene": true
+  },
+  "extends": ["../../../dist/rules"]
+}
