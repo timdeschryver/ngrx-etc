@@ -7,7 +7,7 @@ import {
   ActionReducer,
   Action,
 } from '@ngrx/store'
-import { mutableOn } from '../src'
+import { mutableOn } from '../../src'
 
 test('throws with a on', () => {
   const reducer = setupReducer()
