@@ -51,9 +51,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: 
-            - *cache_key
-            - *dist_key
+          key: *cache_key
+      - restore_cache:
+          key: *dist_key
       - run:
           name: test rules
           command: npm run test:rules
