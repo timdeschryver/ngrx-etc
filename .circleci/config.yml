@@ -46,6 +46,17 @@ jobs:
           key: *dist_key
           paths:
               - dist
+  rules:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: *cache_key
+      - restore_cache:
+          key: *dist_key
+      - run:
+          name: test rules
+          command: npm run test:rules
 
   release:
     <<: *job_defaults
@@ -70,9 +81,12 @@ workflows:
       - build:
           requires:
             - test
-      - release:
+      - rules:
           requires:
             - build
+      - release:
+          requires:
+            - rules
           filters:
             branches:
               only: master

@@ -25,12 +25,18 @@
   "unpkg": "ngrx-etc.umd.js",
   "types": "ngrx-etc.d.ts",
   "scripts": {
-    "build": "microbundle --output ./dist --external all",
+    "prebuild": "rm -rf dist",
+    "build": "microbundle --output ./dist --external all && npm run build:rules",
     "postbuild": "cp ./README.md ./dist & cp ./package.json ./dist",
+    "build:rules": "npm run ngrxActionHygieneRule && npm run ngrxRulesIndex",
+    "ngrxActionHygieneRule": "microbundle ./src/rules/ngrxActionHygieneRule.ts --name ngrxActionHygieneRule --no-compress --output ./dist/rules/ngrxActionHygieneRule.js --external all --target node",
+    "ngrxRulesIndex": "microbundle ./src/rules/index.ts --name ngrxRulesIndex --no-compress --output ./dist/rules/index.js --external all --target node",
     "pretest": "eslint . ",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
+    "test:rules": "tslint --test \"./tests/rules/fixtures/**/tslint.json\"",
+    "test:all": "npm run test && npm run test:rules",
     "semantic-release": "semantic-release"
   },
   "husky": {
@@ -57,9 +63,12 @@
   "peerDependencies": {
     "@angular/core": ">=8.0.0-rc.1",
     "@ngrx/store": ">=8.0.0",
-    "@ngrx/effects": ">=8.0.0"
+    "@ngrx/effects": ">=8.0.0",
+    "tslint": "^5.0.0",
+    "typescript": "^3.0.0"
   },
   "dependencies": {
+    "@phenomnomnominal/tsquery": "^3.0.0",
     "immer": "^3.1.1"
   },
   "devDependencies": {
@@ -79,6 +88,7 @@
     "prettier": "^1.17.0",
     "semantic-release": "^15.13.3",
     "ts-jest": "^24.0.2",
+    "tslint": "^5.0.0",
     "typescript": "^3.4.2"
   }
 }
