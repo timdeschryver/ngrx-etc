@@ -75,7 +75,7 @@ one = createEffect(() => this.actions.pipe(
 
 An implementation of the RxJS `filter` operator to check if the input `Action`'s `__correlationId` is equal to the next `Action`'s `__correlationId`.
 
-## Rules
+## TypeScript Rules
 
 To make use of the rules, extend from `ngrx-etc/rules` in your `tslint.json` file:
 
@@ -88,8 +88,41 @@ To make use of the rules, extend from `ngrx-etc/rules` in your `tslint.json` fil
 }
 ```
 
-### Rules
+| Rule                                                        | Description                                                   |
+| ----------------------------------------------------------- | ------------------------------------------------------------- |
+| [`ngrx-action-hygiene`](#ngrx-action-hygiene)               | Enforces the use of good action hygiene                       |
+| [`ngrx-unique-reducer-action`](#ngrx-unique-reducer-action) | An action can't be handled multiple times in the same reducer |
 
-| Rule                  | Description                             |
-| --------------------- | --------------------------------------- |
-| `ngrx-action-hygiene` | Enforces the use of good action hygiene |
+### Examples
+
+#### `ngrx-action-hygiene`
+
+```ts
+// Invalid: action type doesn't follow the "[Source] Event" convention
+const loadCustomers = createAction('Load Customers')
+
+// Valid
+const loadCustomers = createAction('[Customers Page] Load Customers')
+```
+
+#### `ngrx-unique-reducer-action`
+
+```ts
+// Invalid: `loadCustomers` is handled two times in the customersReducer reducer
+const customersReducer = createReducer(
+  {
+    customers: [],
+  },
+  on(loadCustomers, (state, customers) => ({ ...state, customers })),
+  on(loadCustomers, state => ({ ...state, customers: [] })),
+)
+
+// Valid
+const customersReducer = createReducer(
+  {
+    customers: [],
+  },
+  on(loadCustomers, (state, customers) => ({ ...state, customers })),
+  on(clearCustomers, state => ({ ...state, customers: [] })),
+)
+```

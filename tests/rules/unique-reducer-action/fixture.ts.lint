@@ -1,0 +1,49 @@
+import { createReducer, createAction, on } from '@ngrx/store'
+import { mutableOn } from 'ngrx-etc'
+
+const actionOne = createAction('One')
+const actionTwo = createAction('Two')
+const actionThree = createAction('Three')
+
+const reducerOK = createReducer(
+  {},
+  on(actionOne, state => state),
+  on(actionTwo, state => state),
+  on(actionThree, state => state),
+)
+
+const reducerNOK = createReducer(
+  {},
+  on(actionOne, state => state),
+  on(actionTwo, state => state),
+  on(actionOne, state => state),
+     ~~~~~~~~~                           [dup-action-one % ("actionOne")]
+)
+
+const mutableReducerNOK = createReducer(
+  {},
+  mutableOn(actionOne, state => state),
+  mutableOn(actionTwo, state => state),
+  mutableOn(actionOne, state => state),
+            ~~~~~~~~~                    [dup-action-one % ("actionOne")]
+)
+
+const mixedReducerNOK = createReducer(
+  {},
+  on(actionOne, state => state),
+  mutableOn(actionTwo, state => state),
+  mutableOn(actionOne, state => state),
+            ~~~~~~~~~                    [dup-action-one % ("actionOne")]
+)
+
+const reducerNOKMultiple = createReducer(
+  {},
+  on(actionOne, state => state),
+  mutableOn(actionTwo, state => state),
+  mutableOn(actionOne, state => state),
+            ~~~~~~~~~                    [dup-action-one % ("actionOne")]
+  on(actionOne, state => state),
+     ~~~~~~~~~                           [dup-action-one % ("actionOne")]
+)
+
+[dup-action-one]: The actions within a reducer must be unique, duplicate action %s.
