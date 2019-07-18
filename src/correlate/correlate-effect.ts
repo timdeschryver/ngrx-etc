@@ -5,14 +5,14 @@ import { map, tap, filter } from 'rxjs/operators'
 import { TypedActionWithCorrelation } from './correlate-action'
 
 export function correlate<R extends TypedActionWithCorrelation<string> = TypedActionWithCorrelation<string>>(
-  ...functions: OperatorFunction<any, any>[]
+  ...operators: OperatorFunction<any, any>[]
 ): OperatorFunction<any, R> {
   return function(arg: any): Observable<R> {
-    if (functions.length === 0) {
-      throw new TypeError('Expected functions, received nothing')
+    if (operators.length === 0) {
+      throw new TypeError('Expected operators, received nothing')
     }
 
-    const [head, ...tail] = functions
+    const [head, ...tail] = operators
 
     let trigger: any
     const assignTrigger = arg.pipe(tap((input: any): void => (trigger = input)))
