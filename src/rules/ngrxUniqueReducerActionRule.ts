@@ -5,11 +5,12 @@ import * as ts from 'typescript'
 export class Rule extends Lint.Rules.TypedRule {
   public static metadata: Lint.IRuleMetadata = {
     description: "An action can't be handled multiple times in the same reducer",
+    descriptionDetails: 'See more at https://ngrx.io/api/store/on',
     options: null,
     optionsDescription: 'Not configurable',
-    requiresTypeInfo: true,
     ruleName: 'ngrx-unique-reducer-action',
-    type: 'style',
+    rationale: 'Only the last defined `on` function will be used to handle the action',
+    type: 'functionality',
     typescriptOnly: true,
   }
 

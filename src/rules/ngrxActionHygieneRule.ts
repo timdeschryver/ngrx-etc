@@ -5,11 +5,11 @@ import * as ts from 'typescript'
 export class Rule extends Lint.Rules.TypedRule {
   public static metadata: Lint.IRuleMetadata = {
     description: 'Enforces the use of good action hygiene',
+    descriptionDetails: 'See more at https://www.youtube.com/watch?v=JmnsEvoy-gY',
     options: null,
     optionsDescription: 'Not configurable',
-    requiresTypeInfo: true,
     ruleName: 'ngrx-action-hygiene',
-    type: 'style',
+    type: 'maintainability',
     typescriptOnly: true,
   }
 

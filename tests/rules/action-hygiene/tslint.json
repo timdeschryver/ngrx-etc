@@ -3,5 +3,5 @@
   "rules": {
     "ngrx-action-hygiene": true
   },
-  "extends": ["../../../dist/rules"]
+  "rulesDirectory": ["../../../dist/rules"]
 }

@@ -3,5 +3,5 @@
   "rules": {
     "ngrx-unique-reducer-action": true
   },
-  "extends": ["../../../dist/rules"]
+  "rulesDirectory": ["../../../dist/rules"]
 }
