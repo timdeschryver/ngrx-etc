@@ -57,7 +57,8 @@
   },
   "peerDependencies": {
     "@angular/core": ">=8.0.0-rc.1",
-    "@ngrx/store": ">=8.0.0"
+    "@ngrx/store": ">=8.0.0",
+    "@ngrx/effects": ">=8.0.0"
   },
   "dependencies": {
     "immer": "^3.1.1"
