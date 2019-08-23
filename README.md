@@ -18,7 +18,7 @@ const entityReducer = createReducer<{ entities: Record<number, { id: number; nam
       entity.name = newName
     }
   }),
-  mutableOn(deleete, (state, { id }) => {
+  mutableOn(delete, (state, { id }) => {
     delete state.entities[id]
   }),
 )
