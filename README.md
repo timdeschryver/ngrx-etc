@@ -68,7 +68,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://timdeschryver.dev"><img src="https://avatars1.githubusercontent.com/u/28659384?v=4" width="100px;" alt="Tim Deschryver"/><br /><sub><b>Tim Deschryver</b></sub></a><br /><a href="https://github.com/timdeschryver/ngrx-etc/commits?author=timdeschryver" title="Code">💻</a> <a href="https://github.com/timdeschryver/ngrx-etc/commits?author=timdeschryver" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://www.webtrix.be"><img src="https://avatars1.githubusercontent.com/u/4103756?v=4" width="100px;" alt="Maarten Tibau"/><br /><sub><b>Maarten Tibau</b></sub></a><br /><a href="https://github.com/timdeschryver/ngrx-etc/commits?author=maartentibau" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://twitter.com/maartentibau"><img src="https://avatars1.githubusercontent.com/u/4103756?v=4" width="100px;" alt="Maarten Tibau"/><br /><sub><b>Maarten Tibau</b></sub></a><br /><a href="https://github.com/timdeschryver/ngrx-etc/commits?author=maartentibau" title="Documentation">📖</a></td>
   </tr>
 </table>
 
