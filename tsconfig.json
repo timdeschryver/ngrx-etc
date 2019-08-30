@@ -9,6 +9,7 @@
     "strictPropertyInitialization": false,
     "noStrictGenericChecks": true,
     "noImplicitAny": true,
+    "downlevelIteration": true,
     "lib": ["es2016", "dom"],
     "outDir": "dist",
     "target": "es5",
