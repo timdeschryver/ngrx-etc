@@ -2,7 +2,7 @@ import {
   createReducer,
   createAction,
   on,
-  ɵngrx_modules_store_store_z as createImmutabilityCheckMetaReducer,
+  ɵngrx_modules_store_store_bb as createImmutabilityCheckMetaReducer,
   props,
   ActionReducer,
   Action,

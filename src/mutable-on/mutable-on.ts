@@ -1,7 +1,5 @@
 import produce, { Draft } from 'immer'
-import { Action, ActionCreator } from '@ngrx/store'
-import { ActionType } from '@ngrx/store/src/models'
-import { On } from '@ngrx/store/src/reducer_creator'
+import { Action, ActionCreator, ActionType, On } from '@ngrx/store'
 
 export interface MutableOnReducer<S, C extends ActionCreator[], D = Draft<S>> {
   (state: D, action: ActionType<C[number]>): void
