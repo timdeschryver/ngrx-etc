@@ -145,6 +145,7 @@ function setupReducer(
     strictActionSerializability: true,
     strictStateImmutability: true,
     strictStateSerializability: true,
+    strictActionWithinNgZone: true,
   })
 
   const reducerWithImmutableCheck = immutabilityCheckMetaReducer(reducer)

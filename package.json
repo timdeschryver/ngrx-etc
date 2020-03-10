@@ -25,10 +25,10 @@
   "unpkg": "ngrx-etc.umd.js",
   "types": "ngrx-etc.d.ts",
   "scripts": {
-    "prebuild": "rm -rf dist",
+    "prebuild": "rimraf dist",
     "build": "microbundle --output ./dist --external all",
-    "postbuild": "cp ./README.md ./dist & cp ./package.json ./dist",
-    "pretest": "eslint . ",
+    "postbuild": "cpy ./README.md ./dist & cpy ./package.json ./dist",
+    "pretest": "eslint .",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -56,20 +56,21 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@angular/core": ">=8.0.0-rc.1",
-    "@ngrx/store": ">=8.5.0",
-    "@ngrx/effects": ">=8.5.0"
+    "@angular/core": "^9.0.0",
+    "@ngrx/store": "^9.0.0",
+    "@ngrx/effects": "^9.0.0"
   },
   "dependencies": {
-    "immer": "^3.1.1"
+    "immer": "^6.0.0"
   },
   "devDependencies": {
-    "@angular/core": "^8.0.0-rc.1",
-    "@ngrx/store": "^8.5.0",
-    "@ngrx/effects": "^8.5.0",
+    "@angular/core": "^9.0.0",
+    "@ngrx/effects": "^9.0.0",
+    "@ngrx/store": "^9.0.0",
     "@types/jest": "^24.0.11",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
+    "cpy-cli": "^3.1.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",
@@ -78,9 +79,10 @@
     "lint-staged": "^8.1.5",
     "microbundle": "^0.11.0",
     "prettier": "^1.17.0",
+    "rimraf": "^3.0.2",
     "semantic-release": "^15.13.3",
     "ts-jest": "^24.0.2",
     "tslint": "^5.0.0",
-    "typescript": "^3.4.2"
+    "typescript": "~3.7.4"
   }
 }

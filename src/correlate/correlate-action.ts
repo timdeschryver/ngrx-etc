@@ -1,5 +1,5 @@
 import { Creator, createAction, ActionCreator } from '@ngrx/store'
-import { TypedAction, FunctionWithParametersType, DisallowArraysAndTypeProperty } from '@ngrx/store/src/models'
+import { FunctionWithParametersType, TypedAction, NotAllowedCheck } from '@ngrx/store/src/models'
 
 export interface TypedActionWithCorrelation<T extends string> extends TypedAction<T> {
   __correlationId: string
@@ -17,7 +17,7 @@ export function createActionWithCorrelation<T extends string, P extends object>(
 ): ActionCreator<T, (props: P) => P & TypedActionWithCorrelation<T>>
 export function createActionWithCorrelation<T extends string, P extends any[], R extends object>(
   type: T,
-  creator: Creator<P, DisallowArraysAndTypeProperty<R>>,
+  creator: Creator<P, R> & NotAllowedCheck<R>,
 ): FunctionWithParametersType<P, R & TypedActionWithCorrelation<T>> & TypedActionWithCorrelation<T>
 export function createActionWithCorrelation<T extends string, P extends any[], R extends object>(...args: any[]): any {
   return correlateAction((createAction as any)(...args))
