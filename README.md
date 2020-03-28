@@ -1,4 +1,5 @@
 # NgRx-etc
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 ## `mutableOn`
@@ -10,28 +11,28 @@ const entityReducer = createReducer<{ entities: Record<number, { id: number; nam
   {
     entities: {},
   },
-  on(create, (state, { type, ...entity }) => ({ 
-    ...state, 
+  on(create, (state, { type, ...entity }) => ({
+    ...state,
     entities: { ...state.entities, [entity.id]: entity }
   }),
   on(update, (state, { id, newName }) => {
     const entity = state.entities[id]
-  
+
     if (entity) {
-      return { 
-        ...state, 
-        entities: { 
-          ...state.entities, 
-          [entity.id]: { ...entity, name: newName } 
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          [entity.id]: { ...entity, name: newName }
         }
       }
     }
-    
+
     return state;
   },
   on(remove, (state, { id }) => {
     const { [id]: removedEntity, ...rest } = state.entities;
-    
+
     return { ...state, entities: rest };
   }),
 )
@@ -55,6 +56,39 @@ const entityReducer = createReducer<{ entities: Record<number, { id: number; nam
   }),
   mutableOn(remove, (state, { id }) => {
     delete state.entities[id]
+  }),
+)
+```
+
+## `mutableReducer`
+
+For when you want to go all-in!
+Does work with the NgRx `on` method, as well as the `mutableOn` method.
+The only difference is that it's needed to return the state with the `on` method.
+
+```ts
+const entityReducer = createMutableReducer<{ entities: Record<number, { id: number; name: string }> }>(
+  {
+    entities: {},
+  },
+  on(create, (state, { type, ...entity }) => {
+    state.entities[entity.id] = entity
+
+    // explicit return state with `on`
+    return state
+  }),
+  on(update, (state, { id, newName }) => {
+    const entity = state.entities[id]
+    if (entity) {
+      entity.name = newName
+    }
+
+    // explicit return state with `on`
+    return state
+  }),
+  mutableOn(remove, (state, { id }) => {
+    delete state.entities[id]
+    // don't have to return state with `mutableOn`
   }),
 )
 ```
