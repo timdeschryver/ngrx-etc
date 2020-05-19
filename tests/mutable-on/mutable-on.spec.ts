@@ -112,6 +112,66 @@ test('entity reducer', () => {
   })
 })
 
+test('nested state', () => {
+  const themeChanged = createAction('[Settings] Theme changed', props<{ theme: string }>())
+  const listStyleChanged = createAction('[Settings] List style changed', props<{ listStyle: string }>())
+  const itemAmountChanged = createAction('[Settings] Number of items changed', props<{ items: number }>())
+  const syncToggled = createAction('[Settings] Sync settings')
+
+  const settingsReducer = createReducer<{
+    settings: { theme: { name: string }; grid: { style: string; items: number }; sync: { on: boolean } }
+  }>(
+    {
+      settings: {
+        theme: { name: 'light' },
+        grid: { style: 'small', items: 20 },
+        sync: { on: false },
+      },
+    },
+    mutableOn(themeChanged, (state, { theme }) => {
+      state.settings.theme.name = theme
+    }),
+    mutableOn(listStyleChanged, (state, { listStyle }) => {
+      state.settings.grid.style = listStyle
+    }),
+    mutableOn(itemAmountChanged, (state, { items }) => {
+      state.settings.grid.items = items
+    }),
+    mutableOn(syncToggled, state => {
+      state.settings.sync.on = !state.settings.sync.on
+    }),
+  )
+
+  const reducer = setupReducer(settingsReducer)
+
+  const actions = [
+    themeChanged({ theme: 'light' }),
+    themeChanged({ theme: 'dark' }),
+    listStyleChanged({ listStyle: 'summary' }),
+    itemAmountChanged({ items: 8 }),
+    itemAmountChanged({ items: 23 }),
+    syncToggled(),
+    syncToggled(),
+    syncToggled(),
+  ]
+
+  const state = actions.reduce(reducer, undefined)
+  expect(state).toEqual({
+    settings: {
+      grid: {
+        items: 23,
+        style: 'summary',
+      },
+      sync: {
+        on: true,
+      },
+      theme: {
+        name: 'dark',
+      },
+    },
+  })
+})
+
 const immutableAdd = createAction('immutable-add', props<{ value: number }>())
 const mutableAdd = createAction('mutable-add', props<{ value: number }>())
 const mutableButStillImmutableAdd = createAction('immutable-mutable-add', props<{ value: number }>())

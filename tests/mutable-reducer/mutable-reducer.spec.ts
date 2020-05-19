@@ -73,7 +73,7 @@ test('handles an action', () => {
   expect(state).toEqual(expected)
 })
 
-test('can handle an action that is added more then once', () => {
+test('can handle an action that is added more than once', () => {
   const action = increment()
   const state = mutableReducer(undefined, action)
   const expected = reducer(undefined, action)
