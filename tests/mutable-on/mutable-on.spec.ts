@@ -2,7 +2,7 @@ import {
   createReducer,
   createAction,
   on,
-  ɵngrx_modules_store_store_bb as createImmutabilityCheckMetaReducer,
+  ɵbc as createImmutabilityCheckMetaReducer,
   props,
   ActionReducer,
   Action,
@@ -79,7 +79,7 @@ test('entity reducer', () => {
     {
       entities: {},
     },
-    mutableOn(create, (state, { type, ...entity }) => {
+    mutableOn(create, (state, { type: _, ...entity }) => {
       state.entities[entity.id] = entity
     }),
     mutableOn(update, (state, { id, newName }) => {
@@ -137,7 +137,7 @@ test('nested state', () => {
     mutableOn(itemAmountChanged, (state, { items }) => {
       state.settings.grid.items = items
     }),
-    mutableOn(syncToggled, state => {
+    mutableOn(syncToggled, (state) => {
       state.settings.sync.on = !state.settings.sync.on
     }),
   )

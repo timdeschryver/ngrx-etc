@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { of, merge, Subject, zip, Observable, throwError } from 'rxjs'
-import { mapTo, flatMap, take, shareReplay, switchMap, catchError, exhaustMap, map, debounceTime } from 'rxjs/operators'
+import { mapTo, mergeMap, take, shareReplay, catchError, exhaustMap, map } from 'rxjs/operators'
 
 import { correlate, createActionWithCorrelation, withSameCorrelationAs } from '../../src'
 
@@ -11,7 +11,7 @@ test('it adds the correlation an id', () => {
   const effects = new EffectsFixture(actions, successService)
 
   const dispatchedActions: Action[] = []
-  effects.one.subscribe(action => dispatchedActions.push(action))
+  effects.one.subscribe((action) => dispatchedActions.push(action))
 
   expect(dispatchedActions).toEqual([
     {
@@ -28,7 +28,7 @@ test('it adds the correlation an id to multiple outputs', () => {
   const effects = new EffectsFixture(actions, successService)
 
   const dispatchedActions: Action[] = []
-  effects.twotwo.subscribe(action => dispatchedActions.push(action))
+  effects.twotwo.subscribe((action) => dispatchedActions.push(action))
 
   expect(dispatchedActions).toEqual([
     {
@@ -49,7 +49,7 @@ test('it does not add a correlation an id when the trigger action does not have 
   const effects = new EffectsFixture(actions, successService)
 
   const dispatchedActions: Action[] = []
-  effects.noCorrelation.subscribe(action => dispatchedActions.push(action))
+  effects.noCorrelation.subscribe((action) => dispatchedActions.push(action))
 
   expect(dispatchedActions).toEqual([
     {
@@ -64,7 +64,7 @@ describe('integration tests', () => {
     const effects = new EffectsFixture(actions, successService)
 
     const dispatchedActions: Action[] = []
-    effects.fetch.subscribe(action => dispatchedActions.push(action))
+    effects.fetch.subscribe((action) => dispatchedActions.push(action))
 
     expect(dispatchedActions).toEqual([
       {
@@ -79,7 +79,7 @@ describe('integration tests', () => {
     const effects = new EffectsFixture(actions, failService)
 
     const dispatchedActions: Action[] = []
-    effects.fetch.subscribe(action => dispatchedActions.push(action))
+    effects.fetch.subscribe((action) => dispatchedActions.push(action))
 
     expect(dispatchedActions).toEqual([
       {
@@ -95,7 +95,7 @@ describe('integration tests', () => {
     const effects = new EffectsFixture(actions.pipe(shareReplay()), successService)
     const dispatchedActions: Action[] = []
 
-    merge(effects.one, effects.two, effects.five).subscribe(action => {
+    merge(effects.one, effects.two, effects.five).subscribe((action) => {
       dispatchedActions.push(action)
       actions.next(action)
     })
@@ -134,7 +134,14 @@ class EffectsFixture {
 
   two = createEffect(() => this.actions.pipe(correlate(ofType(two), mapTo(three()))))
 
-  twotwo = createEffect(() => this.actions.pipe(correlate(ofType(one), flatMap(() => [two(), twotwo()]))))
+  twotwo = createEffect(() =>
+    this.actions.pipe(
+      correlate(
+        ofType(one),
+        mergeMap(() => [two(), twotwo()]),
+      ),
+    ),
+  )
 
   noCorrelation = createEffect(() =>
     this.actions.pipe(correlate(ofType('NO CORRELATION IN'), mapTo({ type: 'NO CORRELATION OUT' }))),
@@ -158,18 +165,10 @@ class EffectsFixture {
     this.actions.pipe(
       correlate(
         ofType(one),
-        flatMap(a =>
+        mergeMap((a) =>
           zip(
-            this.actions.pipe(
-              ofType(two),
-              withSameCorrelationAs(a),
-              take(1),
-            ),
-            this.actions.pipe(
-              ofType(three),
-              withSameCorrelationAs(a),
-              take(1),
-            ),
+            this.actions.pipe(ofType(two), withSameCorrelationAs(a), take(1)),
+            this.actions.pipe(ofType(three), withSameCorrelationAs(a), take(1)),
           ),
         ),
         mapTo(five()),

@@ -84,7 +84,7 @@ export function correlate<R extends TypedActionWithCorrelation<string> | Action>
     throw new TypeError('Expected operators, received nothing')
   }
 
-  return function<A extends Observable<any>>(stream: A): Observable<R> {
+  return function <A extends Observable<any>>(stream: A): Observable<R> {
     return stream.pipe(
       mergeMap(
         (trigger): Observable<R> => {
@@ -130,7 +130,7 @@ function logCorrelation<
   O extends TypedActionWithCorrelation<string> = TypedActionWithCorrelation<string>
 >(trigger: T, output: O): void {
   if (isDevMode()) {
-    let correlations = (window as any)._actionCorrelations || {}
+    const correlations = (window as any)._actionCorrelations || {}
     correlations[trigger.__correlationId] = (correlations[trigger.__correlationId] || [trigger]).concat(output)
     ;(window as any)._actionCorrelations = correlations
   }

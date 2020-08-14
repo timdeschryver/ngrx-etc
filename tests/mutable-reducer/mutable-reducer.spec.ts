@@ -17,11 +17,11 @@ const mutableReducer = createMutableReducer(
     // TODO: should be possible to not return something
     return state
   }),
-  on(increment, state => {
+  on(increment, (state) => {
     state.count++
     return state
   }),
-  on(increment, state => {
+  on(increment, (state) => {
     state.count++
     return state
   }),
@@ -38,13 +38,13 @@ const reducer = createReducer(
       todos: [...state.todos, { text: action.todo, completed: false }],
     }
   }),
-  on(increment, state => {
+  on(increment, (state) => {
     return {
       ...state,
       count: state.count + 1,
     }
   }),
-  on(increment, state => {
+  on(increment, (state) => {
     return {
       ...state,
       count: state.count + 1,
