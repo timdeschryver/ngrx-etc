@@ -20,14 +20,18 @@
   "homepage": "https://github.com/timdeschryver/ngrx-etc#readme",
   "private": false,
   "source": "src/index.ts",
-  "main": "ngrx-etc.js",
-  "umd:main": "ngrx-etc.umd.js",
-  "unpkg": "ngrx-etc.umd.js",
-  "types": "ngrx-etc.d.ts",
+  "main": "dist/ngrx-etc.js",
+  "umd:main": "dist/ngrx-etc.umd.js",
+  "unpkg": "dist/ngrx-etc.umd.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "package.json",
+    "README.md",
+    "dist"
+  ],
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "microbundle --output ./dist --external all",
-    "postbuild": "cpy ./README.md ./dist & cpy ./package.json ./dist",
     "pretest": "eslint .",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -48,9 +52,6 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "release": {
-    "pkgRoot": "dist"
   },
   "publishConfig": {
     "access": "public"
