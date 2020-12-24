@@ -1,1 +1,1 @@
-export { mutableOn } from './mutable-on'
+export { immerOn as mutableOn } from 'ngrx-immer/store'

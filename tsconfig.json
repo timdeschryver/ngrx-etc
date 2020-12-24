@@ -8,6 +8,7 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "noStrictGenericChecks": true,
+    "esModuleInterop": true,
     "noImplicitAny": true,
     "lib": ["es2016", "dom"],
     "outDir": "dist",
