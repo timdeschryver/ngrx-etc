@@ -2,7 +2,7 @@ import {
   createReducer,
   createAction,
   on,
-  ɵbc as createImmutabilityCheckMetaReducer,
+  ɵbb as createImmutabilityCheckMetaReducer,
   props,
   ActionReducer,
   Action,

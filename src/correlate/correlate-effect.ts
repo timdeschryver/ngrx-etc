@@ -86,27 +86,23 @@ export function correlate<R extends TypedActionWithCorrelation<string> | Action>
 
   return function <A extends Observable<any>>(stream: A): Observable<R> {
     return stream.pipe(
-      mergeMap(
-        (trigger): Observable<R> => {
-          return of(trigger).pipe(
-            pipeFromArray(operators),
-            map(
-              (out: R): R => {
-                if (!isCorrelation(trigger)) {
-                  return out
-                }
+      mergeMap((trigger): Observable<R> => {
+        return of(trigger).pipe(
+          pipeFromArray(operators),
+          map((out: R): R => {
+            if (!isCorrelation(trigger)) {
+              return out
+            }
 
-                const actionWithCorrelation = {
-                  ...out,
-                  __correlationId: trigger.__correlationId,
-                }
-                logCorrelation(trigger, actionWithCorrelation as TypedActionWithCorrelation<string>)
-                return actionWithCorrelation
-              },
-            ),
-          )
-        },
-      ),
+            const actionWithCorrelation = {
+              ...out,
+              __correlationId: trigger.__correlationId,
+            }
+            logCorrelation(trigger, actionWithCorrelation as TypedActionWithCorrelation<string>)
+            return actionWithCorrelation
+          }),
+        )
+      }),
     )
   }
 }
@@ -127,7 +123,7 @@ function isCorrelation(action: Action): action is TypedActionWithCorrelation<str
  */
 function logCorrelation<
   T extends TypedActionWithCorrelation<string> = TypedActionWithCorrelation<string>,
-  O extends TypedActionWithCorrelation<string> = TypedActionWithCorrelation<string>
+  O extends TypedActionWithCorrelation<string> = TypedActionWithCorrelation<string>,
 >(trigger: T, output: O): void {
   if (isDevMode()) {
     const correlations = (window as any)._actionCorrelations || {}
