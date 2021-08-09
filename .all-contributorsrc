@@ -23,11 +23,21 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "xianshenglu",
+      "name": "xiansheng lu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23273077?v=4",
+      "profile": "https://xianshenglu.xyz",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "ngrx-etc",
   "projectOwner": "timdeschryver",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
