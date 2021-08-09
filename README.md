@@ -98,13 +98,18 @@ const entityReducer = createMutableReducer<{ entities: Record<number, { id: numb
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://timdeschryver.dev"><img src="https://avatars1.githubusercontent.com/u/28659384?v=4" width="100px;" alt="Tim Deschryver"/><br /><sub><b>Tim Deschryver</b></sub></a><br /><a href="https://github.com/timdeschryver/ngrx-etc/commits?author=timdeschryver" title="Code">💻</a> <a href="https://github.com/timdeschryver/ngrx-etc/commits?author=timdeschryver" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://twitter.com/maartentibau"><img src="https://avatars1.githubusercontent.com/u/4103756?v=4" width="100px;" alt="Maarten Tibau"/><br /><sub><b>Maarten Tibau</b></sub></a><br /><a href="https://github.com/timdeschryver/ngrx-etc/commits?author=maartentibau" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://timdeschryver.dev"><img src="https://avatars1.githubusercontent.com/u/28659384?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tim Deschryver</b></sub></a><br /><a href="https://github.com/timdeschryver/ngrx-etc/commits?author=timdeschryver" title="Code">💻</a> <a href="https://github.com/timdeschryver/ngrx-etc/commits?author=timdeschryver" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://twitter.com/maartentibau"><img src="https://avatars1.githubusercontent.com/u/4103756?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Maarten Tibau</b></sub></a><br /><a href="https://github.com/timdeschryver/ngrx-etc/commits?author=maartentibau" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://xianshenglu.xyz"><img src="https://avatars.githubusercontent.com/u/23273077?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xiansheng lu</b></sub></a><br /><a href="https://github.com/timdeschryver/ngrx-etc/commits?author=xianshenglu" title="Documentation">📖</a></td>
   </tr>
 </table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
